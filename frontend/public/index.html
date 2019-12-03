@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hello world!</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+  Hello world!
+
+  <div id="root">
+    Backend version: {{ version }}
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    new Vue({
+      el: '#root',
+      data: {
+        version: null,
+        starships: null
+      },
+      mounted() {
+        fetch('/api/starships/')
+          .then((r) => r.json())
+          .then((data) => console.log(data))
+
+        fetch('/bff/version')
+          .then((r) => r.json())
+          .then(({ version }) => {
+            this.version = version
+          })
+      }
+    })
+  })
+  </script>
+</body>
+</html>
