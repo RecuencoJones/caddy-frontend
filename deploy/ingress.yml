@@ -5,9 +5,14 @@ metadata:
     app: frontend-webpack
   name: frontend-webpack
 spec:
+  tls:
+  - hosts:
+    - frontend.recuencojones.usw1.kubesail.io
+    secretName: frontend-webpack-ingress
   rules:
-  - http:
+  - host: frontend.recuencojones.usw1.kubesail.io
+    http:
       paths:
       - backend:
-          serviceName: frontend-webpack
+          serviceName: frontend-webpack-2015
           servicePort: 2015

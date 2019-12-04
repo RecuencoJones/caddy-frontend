@@ -1,4 +1,3 @@
-# BFF
 kind: Deployment
 apiVersion: apps/v1beta1
 metadata:
@@ -17,26 +16,12 @@ spec:
             - containerPort: 3000
           resources:
             requests:
-              cpu: 10m
+              cpu: 1m
               memory: 64Mi
             limits:
-              cpu: 250m
+              cpu: 100m
               memory: 64Mi
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: bff
-spec:
-  selector:
-    app: bff
-  ports:
-    - name: http
-      port: 3000
----
-
----
-# Frontend Webpack
 kind: Deployment
 apiVersion: apps/v1beta1
 metadata:
@@ -52,22 +37,13 @@ spec:
           image: recuencojones/caddy-frontend-webpack:latest
           ports:
             - containerPort: 2015
+          env:
+          - name: PROXY_BFF_HOST
+            value: http://bff-3000:3000
           resources:
             requests:
-              cpu: 10m
+              cpu: 1m
               memory: 64Mi
             limits:
-              cpu: 250m
+              cpu: 100m
               memory: 64Mi
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: frontend-webpack
-spec:
-  selector:
-    app: frontend-webpack
-  ports:
-    - name: http
-      port: 2015
----
