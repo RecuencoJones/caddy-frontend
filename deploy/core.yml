@@ -1,0 +1,73 @@
+# BFF
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: bff
+spec:
+  template:
+    metadata:
+      labels:
+        app: bff
+    spec:
+      containers:
+        - name: bff
+          image: recuencojones/caddy-frontend-bff:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 64Mi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bff
+spec:
+  selector:
+    app: bff
+  ports:
+    - name: http
+      port: 3000
+---
+
+---
+# Frontend Webpack
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: frontend-webpack
+spec:
+  template:
+    metadata:
+      labels:
+        app: frontend-webpack
+    spec:
+      containers:
+        - name: frontend-webpack
+          image: recuencojones/caddy-frontend-webpack:latest
+          ports:
+            - containerPort: 2015
+          resources:
+            requests:
+              cpu: 10m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 64Mi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend-webpack
+spec:
+  selector:
+    app: frontend-webpack
+  ports:
+    - name: http
+      port: 2015
+---

@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Hello world!</title>
+  <title>Hello, world!</title>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
-  Hello world!
-
   <div id="root">
+    Hello, world!
     Backend version: {{ version }}
   </div>
 
@@ -20,8 +19,7 @@
     new Vue({
       el: '#root',
       data: {
-        version: null,
-        starships: null
+        version: null
       },
       mounted() {
         fetch('/api/starships/')

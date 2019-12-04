@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  frontend:
-    build: ./frontend
+  frontend-static:
+    build: ./frontend-static
     ports:
       - 8080:2015
     environment:
@@ -10,10 +10,17 @@ services:
     networks:
       - default
 
+  frontend-webpack:
+    build: ./frontend-webpack
+    ports:
+      - 8081:2015
+    environment:
+      PROXY_BFF_HOST: http://bff:3000
+    networks:
+      - default
+
   bff:
     build: ./bff
-    environment:
-      NODE_PORT: 3000
     networks:
       - default
 

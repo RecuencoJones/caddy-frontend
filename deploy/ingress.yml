@@ -1,0 +1,13 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  labels:
+    app: frontend-webpack
+  name: frontend-webpack
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: frontend-webpack
+          servicePort: 2015

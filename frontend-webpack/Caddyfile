@@ -1,0 +1,17 @@
+localhost {
+  tls off
+
+  root {$CONTENT_ROOT}
+
+  gzip
+
+  log stdout
+
+  proxy /bff {$PROXY_BFF_HOST} {
+    without /bff
+  }
+
+  proxy /api {$PROXY_API_HOST} {
+    without /api
+  }
+}
